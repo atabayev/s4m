@@ -1,0 +1,10 @@
+Task 1:
+
+1. SELECT eventType, COUNT(*) as eventCount FROM events GROUP BY eventType HAVING eventCount > 1000;
+2. SELECT * FROM events WHERE toDate(eventTime) = toStartOfMonth(eventTime);
+3. SELECT DISTINCT userID FROM events WHERE userID IN (
+    SELECT userID
+    FROM events
+    GROUP BY userID
+    HAVING count(DISTINCT eventType) > 3
+);

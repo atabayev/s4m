@@ -1,0 +1,41 @@
+Task 1:
+
+1. SELECT * FROM users u1 WHERE posts_qty > (SELECT posts_qty FROM users u2 WHERE u1.invited_by_user_id = u2.id);
+2. SELECT MAX(posts_qty) FROM users GROUP BY group_id;
+3. SELECT group_id, COUNT(id) as user_count FROM users GROUP BY group_id HAVING COUNT(id) > 2;
+4. SELECT name FROM users u1 WHERE u1.group_id != (SELECT group_id FROM users u2 WHERE u1.invited_by_user_id=u2.id);
+
+--------------------------------------
+
+Task 2:
+
+Add Columns:
+ALTER TABLE users ADD COLUMN reg_date DATE;
+ALTER TABLE users ADD COLUMN online BOOLEAN;
+ALTER TABLE users ADD COLUMN last_visited_at TIMESTAMP;
+
+Alter column:
+ALTER TABLE users ADD COLUMN temp_column BOOLEAN;
+UPDATE users SET temp_column = online::BOOLEAN;
+ALTER TABLE users DROP COLUMN online;
+ALTER TABLE users RENAME COLUMN temp_column TO status;
+
+Add 2 indexes:
+CREATE INDEX CONCURRENTLY idx_name1 ON your_table (column1);
+CREATE INDEX CONCURRENTLY idx_name2 ON your_table (column2);
+
+--------------------------------------
+
+Task 3:
+
+<?php
+$startDate = strtotime('2022-09-16');
+$finishDate = strtotime('2023-10-16');
+
+$daysDiff = floor(($finishDate - $startDate) / (60 * 60 * 24));
+$remainingDays = 7 - (date('N', $startDate) - 1);
+
+$Tuesdays = floor(($daysDiff - $remainingDays) / 7);
+
+echo $Tuesdays;
+?>
